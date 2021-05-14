@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="10dp"
+    android:orientation="vertical"
+    tools:context=".Upload">
+
+    <VideoView
+        android:layout_width="match_parent"
+        android:layout_height="230dp"
+        android:id="@+id/videoview_main"
+        android:backgroundTint="@color/black"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="영상 제목 (필수)"
+        android:textSize="20sp"
+        android:id="@+id/et_video_name"
+        android:layout_margin="10dp"
+        android:textColor="@color/black"
+        android:autoText="true"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="영상 선택"
+        android:clickable="true"
+        android:onClick="ChooseVideo"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"/>
+
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/button_upload_main"
+        android:layout_margin="20dp"
+        android:text="upload"/>
+
+    <ProgressBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        android:indeterminate="true"
+        android:indeterminateTint="@color/purple_200"
+        android:visibility="invisible"
+        android:id="@+id/progressBar_main"/>
+
+</LinearLayout>

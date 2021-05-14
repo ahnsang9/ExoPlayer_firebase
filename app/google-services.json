@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "28256275430",
+    "firebase_url": "https://exoplayer-760cc-default-rtdb.firebaseio.com",
+    "project_id": "exoplayer-760cc",
+    "storage_bucket": "exoplayer-760cc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:28256275430:android:29b37afb2d8787f1192427",
+        "android_client_info": {
+          "package_name": "com.example.exoplayer_firebase"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "28256275430-715hh4r3d12mcf5dcd27fuunmkntbico.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.exoplayer_firebase",
+            "certificate_hash": "85fea38b78dc05d7db4c9f68aeed88ddffe1ca84"
+          }
+        },
+        {
+          "client_id": "28256275430-25uqrg4p1pq35le9h0i3qbnpl7tbrnee.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD_GtQKQD5p-0K5AtuqIcjWpb4x2pq0WSs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "28256275430-25uqrg4p1pq35le9h0i3qbnpl7tbrnee.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

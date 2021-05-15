@@ -1,18 +1,26 @@
 package com.example.exoplayer_firebase;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.exoplayer2.ExoPlayerFactory;
 import com.google.android.exoplayer2.SimpleExoPlayer;
 import com.google.android.exoplayer2.extractor.ExtractorsFactory;
@@ -23,6 +31,9 @@ import com.google.android.exoplayer2.upstream.DataSource;
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
 import com.google.android.exoplayer2.upstream.DefaultHttpDataSourceFactory;
 import com.google.android.exoplayer2.util.Util;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 
 public class Fullscreen extends AppCompatActivity {
 
@@ -36,6 +47,10 @@ public class Fullscreen extends AppCompatActivity {
     private boolean playwhenready = false;
     private int currentWindow = 0;
     private long playbackposition = 0;
+
+    DatabaseReference databaseReference2;
+    RecyclerView recyclerView2;
+    FirebaseDatabase database2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,6 +106,46 @@ public class Fullscreen extends AppCompatActivity {
                 }
             }
         });
+
+
+        recyclerView2 = findViewById(R.id.recyclerview_Fullscreen2);
+        recyclerView2.setHasFixedSize(true);
+        recyclerView2.setLayoutManager(new LinearLayoutManager(this));
+        database2 = FirebaseDatabase.getInstance();
+        databaseReference2 = database2.getReference("video");
+
+    }
+
+    private  void firebaseSearch(String searchtext){
+        String query = searchtext.toLowerCase();
+        Query firebaseQuery = databaseReference2.orderByChild("search").startAt(query).endAt(query + "\uf8ff");
+
+        FirebaseRecyclerOptions<Member> options =
+                new FirebaseRecyclerOptions.Builder<Member>()
+                        .setQuery(firebaseQuery,Member.class) //firebaseQuery로 변경
+                        .build();
+
+        FirebaseRecyclerAdapter<Member,ViewHolder> firebaseRecyclerAdapter =
+                new FirebaseRecyclerAdapter<Member, ViewHolder>(options) {
+                    @Override
+                    protected void onBindViewHolder(@NonNull ViewHolder holder, int position, @NonNull Member model) {
+
+                        holder.setExoplayer(getApplication(),model.getName(),model.getVideourl());
+
+                    }
+
+                    @NonNull
+                    @Override
+                    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+                        View view = LayoutInflater. from(parent.getContext())
+                                .inflate(R.layout.item,parent,false);
+
+                        return new ViewHolder(view);
+                    }
+                };
+
+        firebaseRecyclerAdapter.startListening();
+        recyclerView2.setAdapter(firebaseRecyclerAdapter);
     }
 
     private MediaSource buildMediaSource(Uri uri){
@@ -117,6 +172,34 @@ public class Fullscreen extends AppCompatActivity {
         if (Util.SDK_INT >= 26){
             initializeplayer();
         }
+
+        FirebaseRecyclerOptions<Member> options =
+                new FirebaseRecyclerOptions.Builder<Member>()
+                        .setQuery(databaseReference2,Member.class)
+                        .build();
+
+        FirebaseRecyclerAdapter<Member,ViewHolder> firebaseRecyclerAdapter =
+                new FirebaseRecyclerAdapter<Member, ViewHolder>(options) {
+                    @Override
+                    protected void onBindViewHolder(@NonNull ViewHolder holder, int position, @NonNull Member model) {
+
+                        holder.setExoplayer(getApplication(),model.getName(),model.getVideourl());
+
+                    }
+
+                    @NonNull
+                    @Override
+                    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+                        View view = LayoutInflater. from(parent.getContext())
+                                .inflate(R.layout.item,parent,false);
+
+                        return new ViewHolder(view);
+                    }
+                };
+
+        firebaseRecyclerAdapter.startListening();
+        recyclerView2.setAdapter(firebaseRecyclerAdapter);
+
     }
 
     @Override

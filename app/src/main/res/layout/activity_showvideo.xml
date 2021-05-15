@@ -10,7 +10,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerview_ShowVideo"
         android:layout_width="match_parent"
-        android:layout_height="684dp" />
+        android:layout_height="580dp" />
 
     <TextView
         android:layout_width="57dp"

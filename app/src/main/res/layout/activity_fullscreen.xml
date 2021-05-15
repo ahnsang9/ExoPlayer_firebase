@@ -22,4 +22,18 @@
         android:id="@+id/tv_fullscreen"
         android:textColor="@color/black"/>
 
+    <TextView
+        android:id="@+id/recommend"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="추천영상"
+        android:layout_marginTop="30dp"
+        android:textColor="@color/black"
+        android:textSize="20sp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerview_Fullscreen2"
+        android:layout_width="match_parent"
+        android:layout_height="402dp" />
+
 </LinearLayout>
